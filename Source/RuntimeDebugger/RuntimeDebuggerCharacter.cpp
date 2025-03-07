@@ -61,6 +61,14 @@ void ARuntimeDebuggerCharacter::Tick(float DeltaSeconds)
 	MyLocation = GetActorLocation();
 }
 
+void ARuntimeDebuggerCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	MyClassArray.Add(NewObject<UMyClass>());
+	MyClassArray.Add(nullptr);
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Input
 

@@ -19,7 +19,7 @@ void SRuntimeStringProperty::Construct(const FArguments& InArgs)
 	];
 }
 
-void SRuntimeStringProperty::SetProperty(FProperty* InProperty, UObject* InObject)
+void SRuntimeStringProperty::SetProperty(FProperty* InProperty, void* InObject)
 {
 	TSRuntimePropertySlateBase<FString>::SetProperty(InProperty, InObject);
 
@@ -27,7 +27,7 @@ void SRuntimeStringProperty::SetProperty(FProperty* InProperty, UObject* InObjec
 	{
 		if (Property)
 		{
-			if (FString* ContainerPtrToValuePtr = Property->ContainerPtrToValuePtr<FString>(Object.Get()))
+			if (FString* ContainerPtrToValuePtr = Property->ContainerPtrToValuePtr<FString>(Object))
 			{
 				*ContainerPtrToValuePtr = InValue;
 			}
@@ -38,7 +38,7 @@ void SRuntimeStringProperty::SetProperty(FProperty* InProperty, UObject* InObjec
 	{
 		if (Property)
 		{
-			if (FString* ContainerPtrToValuePtr = Property->ContainerPtrToValuePtr<FString>(Object.Get()))
+			if (FString* ContainerPtrToValuePtr = Property->ContainerPtrToValuePtr<FString>(Object))
 			{
 				return *ContainerPtrToValuePtr;
 			}

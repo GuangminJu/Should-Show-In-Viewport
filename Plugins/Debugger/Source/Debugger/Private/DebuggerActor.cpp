@@ -28,5 +28,6 @@ UDetailsViewWidgetComponent* ADebuggerActor::CreateWidgetComponent()
 {
 	UDetailsViewWidgetComponent* WidgetComponent = NewObject<UDetailsViewWidgetComponent>(this);
 	WidgetComponent->RegisterComponent();
+	AddInstanceComponent(WidgetComponent);
 	return WidgetComponent;
 }

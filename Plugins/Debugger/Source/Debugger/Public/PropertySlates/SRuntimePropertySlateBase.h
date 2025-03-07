@@ -9,14 +9,14 @@ public:
 
 	SLATE_END_ARGS()
 
-	virtual void SetProperty(FProperty* InProperty, UObject* InObject)
+	virtual void SetProperty(FProperty* InProperty, void* InObject)
 	{
 		Property = InProperty;
 		Object = InObject;
 	}
 
 	FProperty* Property = nullptr;
-	TWeakObjectPtr<UObject> Object;
+	void* Object;
 };
 
 template <typename T>

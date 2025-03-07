@@ -23,14 +23,14 @@ void SRuntimeIntProperty::Construct(const FArguments& InArgs)
 	];
 }
 
-void SRuntimeIntProperty::SetProperty(FProperty* InProperty, UObject* InObject)
+void SRuntimeIntProperty::SetProperty(FProperty* InProperty, void* InObject)
 {
 	TSRuntimePropertySlateBase<int>::SetProperty(InProperty, InObject);
 
 	Set.BindLambda(
 		[this](int32 InValue)
 		{
-			if (int32* ContainerPtrToValuePtr = Property->ContainerPtrToValuePtr<int32>(Object.Get()))
+			if (int32* ContainerPtrToValuePtr = Property->ContainerPtrToValuePtr<int32>(Object))
 			{
 				*ContainerPtrToValuePtr = InValue;
 			}
@@ -38,7 +38,7 @@ void SRuntimeIntProperty::SetProperty(FProperty* InProperty, UObject* InObject)
 	Get.BindLambda(
 		[this]()
 		{
-			if (int32* ContainerPtrToValuePtr = Property->ContainerPtrToValuePtr<int32>(Object.Get()))
+			if (int32* ContainerPtrToValuePtr = Property->ContainerPtrToValuePtr<int32>(Object))
 			{
 				return *ContainerPtrToValuePtr;
 			}
