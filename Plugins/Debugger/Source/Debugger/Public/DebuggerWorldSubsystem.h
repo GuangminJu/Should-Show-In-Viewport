@@ -12,20 +12,22 @@
  */
 
 UCLASS()
-class DEBUGGER_API UDebuggerWorldSubsystem : public UWorldSubsystem, public FTickableGameObject
+class DEBUGGER_API UDebuggerWorldSubsystem : public UWorldSubsystem
 {
 	GENERATED_BODY()
 
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	virtual bool DoesSupportWorldType(const EWorldType::Type WorldType) const override;
-	virtual void Tick(float DeltaTime) override;
-	virtual TStatId GetStatId() const override;
-
+public:
+	
 	UFUNCTION(BlueprintCallable, Category = "Debugger")
 	void OpenDebugger(AActor* InActor);
 
 	UFUNCTION(BlueprintCallable, Category = "Debugger")
 	void CloseDebugger(AActor* InActor);
+
+	UFUNCTION(BlueprintCallable, Category = "Debugger")
+	ADebuggerActor* GetDebuggerActor() const;
 	
 	UPROPERTY()
 	TArray<UDetailsViewWidgetComponent*> WidgetComponents;

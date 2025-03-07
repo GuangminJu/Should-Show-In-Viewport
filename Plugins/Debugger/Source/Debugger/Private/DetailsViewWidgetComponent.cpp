@@ -3,10 +3,6 @@
 
 #include "DetailsViewWidgetComponent.h"
 
-#include "LevelEditor.h"
-#include "SLevelViewport.h"
-
-
 void UDetailsViewWidgetComponent::BeginPlay()
 {
 	Super::BeginPlay();
@@ -15,8 +11,9 @@ void UDetailsViewWidgetComponent::BeginPlay()
 	FPropertyEditorModule& PropertyEditorModule = FModuleManager::GetModuleChecked<FPropertyEditorModule>(
 		TEXT("PropertyEditor"));
 	
-	DetailView = SNew(SInViewportDetails);
+	DetailView = SNew(SRuntimeViewportDetails);
 	SetSlateWidget(DetailView);
+	SetDrawSize(FVector2D(400, 400));
 }
 
 void UDetailsViewWidgetComponent::TickComponent(float DeltaTime, enum ELevelTick TickType,
@@ -34,16 +31,23 @@ void UDetailsViewWidgetComponent::TickComponent(float DeltaTime, enum ELevelTick
 
 bool UDetailsViewWidgetComponent::IsSelectedActor() const
 {
-	return !!DetailView->GetSelectedActorInEditor();
+	return DetailView->GetActors().Num() > 0;
 }
 
 FVector UDetailsViewWidgetComponent::GetWidgetLocation() const
 {
-	AActor* SelectedActorInEditor = DetailView->GetSelectedActorInEditor();
+	TArray<AActor*> Actors = DetailView->GetActors();
+	if (Actors.Num() == 0)
+	{
+		return FVector::ZeroVector;
+	}
+	
+	AActor* SelectedActorInEditor = Actors[0];
 	if (!SelectedActorInEditor)
 	{
 		return FVector::ZeroVector;
 	}
+	
 	return SelectedActorInEditor->GetActorLocation();
 }
 
@@ -54,7 +58,8 @@ void UDetailsViewWidgetComponent::SetObject(UObject* InObject) const
 
 bool UDetailsViewWidgetComponent::IsSelected(const UObject* InObject) const
 {
-	return InObject == DetailView->GetSelectedActorInEditor();
+	TArray<UObject*> Objects = DetailView->GetObjects();
+	return Objects.Contains(InObject);
 }
 
 bool UDetailsViewWidgetComponent::IsSelectedObject() const

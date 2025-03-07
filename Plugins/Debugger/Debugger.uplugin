@@ -16,6 +16,11 @@
 	"Modules": [
 		{
 			"Name": "Debugger",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "DebuggerEditor",
 			"Type": "Editor",
 			"LoadingPhase": "Default"
 		}

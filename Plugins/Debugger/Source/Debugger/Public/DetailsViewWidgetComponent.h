@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/WidgetComponent.h"
 
-#include "SInViewportDetails.h"
+#include "SRuntimeViewportDetails.h"
 
 #include "DetailsViewWidgetComponent.generated.h"
 
@@ -27,5 +27,5 @@ public:
 
 	bool bSearch = false;
 private:
-	TSharedPtr<SInViewportDetails> DetailView;
+	TSharedPtr<SRuntimeViewportDetails> DetailView;
 };

@@ -3,8 +3,6 @@
 
 #include "DebuggerWorldSubsystem.h"
 
-#include "Selection.h"
-
 void UDebuggerWorldSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
@@ -15,36 +13,6 @@ void UDebuggerWorldSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 bool UDebuggerWorldSubsystem::DoesSupportWorldType(const EWorldType::Type WorldType) const
 {
 	return WorldType == EWorldType::Game || WorldType == EWorldType::PIE;
-}
-
-void UDebuggerWorldSubsystem::Tick(float DeltaTime)
-{
-	if (!DebuggerActor)
-	{
-		return;
-	}
-
-	FSelectionIterator SelectedActorIterator = GEditor->GetSelectedActorIterator();
-	while (SelectedActorIterator)
-	{
-		ON_SCOPE_EXIT
-		{
-			++SelectedActorIterator;
-		};
-
-		UObject* ActorIterator = *SelectedActorIterator;
-		if (!ActorIterator)
-		{
-			continue;
-		}
-
-		OpenDebugger(Cast<AActor>(ActorIterator));
-	}
-}
-
-TStatId UDebuggerWorldSubsystem::GetStatId() const
-{
-	return TStatId();
 }
 
 void UDebuggerWorldSubsystem::OpenDebugger(AActor* InActor)
@@ -83,4 +51,9 @@ void UDebuggerWorldSubsystem::CloseDebugger(AActor* InActor)
 			break;
 		}
 	}
+}
+
+ADebuggerActor* UDebuggerWorldSubsystem::GetDebuggerActor() const
+{
+	return DebuggerActor;
 }

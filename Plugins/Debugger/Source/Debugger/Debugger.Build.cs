@@ -27,7 +27,7 @@ public class Debugger : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Core", "UMG", "UnrealEd", "EditorFramework", "PropertyEditor", "ToolMenus", "LevelEditor", "InputCore"
+				"Core", "UMG", "InputCore"
 				// ... add other public dependencies that you statically link with here ...
 			}
 		);
