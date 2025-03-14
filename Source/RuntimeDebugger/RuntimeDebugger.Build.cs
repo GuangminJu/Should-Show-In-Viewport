@@ -1,0 +1,13 @@
+// Copyright 2025 mellos game. All rights reserved.
+
+using UnrealBuildTool;
+
+public class RuntimeDebugger : ModuleRules
+{
+	public RuntimeDebugger(ReadOnlyTargetRules Target) : base(Target)
+	{
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
+	}
+}

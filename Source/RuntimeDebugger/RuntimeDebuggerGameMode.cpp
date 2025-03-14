@@ -1,0 +1,15 @@
+// Copyright 2025 mellos game. All rights reserved.
+
+#include "RuntimeDebuggerGameMode.h"
+#include "RuntimeDebuggerCharacter.h"
+#include "UObject/ConstructorHelpers.h"
+
+ARuntimeDebuggerGameMode::ARuntimeDebuggerGameMode()
+{
+	// set default pawn class to our Blueprinted character
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/ThirdPerson/Blueprints/BP_ThirdPersonCharacter"));
+	if (PlayerPawnBPClass.Class != NULL)
+	{
+		DefaultPawnClass = PlayerPawnBPClass.Class;
+	}
+}
