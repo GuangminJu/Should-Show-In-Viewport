@@ -105,6 +105,10 @@ class ARuntimeDebuggerCharacter : public ACharacter
 		meta = (AllowPrivateAccess = "true", ShouldShowInViewport = true, Debugger))
 	TArray<UMyClass*> MyClassArray;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Camera,
+	meta = (AllowPrivateAccess = "true", ShouldShowInViewport = true, Debugger))
+	FFilePath MyFilePath;
+
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true", Debugger))
 	USpringArmComponent* CameraBoom;
