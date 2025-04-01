@@ -15,6 +15,15 @@ struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
+UENUM(BlueprintType)
+enum class EMyEnum : uint8
+{
+	None,
+	Enum1,
+	Enum2,
+	Enum3,
+};
+
 USTRUCT(Blueprintable)
 struct FMyStruct
 {
@@ -68,6 +77,10 @@ class ARuntimeDebuggerCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Camera,
 		meta = (AllowPrivateAccess = "true", ShouldShowInViewport = true, Debugger))
 	FRotator MyRotation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Camera,
+	meta = (AllowPrivateAccess = "true", ShouldShowInViewport = true))
+	EMyEnum MyEnum;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Camera,
 		meta = (AllowPrivateAccess = "true", ShouldShowInViewport = true, Debugger))
